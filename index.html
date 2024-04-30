@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Setlist Maker</title>
+
+    <style>
+      textarea,
+      button {
+        width: 90%;
+        margin: 10px auto; /* Centering buttons and textarea */
+        display: block;
+      }
+      #listsContainer {
+        display: flex;
+        flex-wrap: wrap; /* Allows the container to wrap on smaller screens */
+        justify-content: space-between;
+      }
+      #masterList,
+      #setList {
+        width: 100%; /* Full width on smaller screens */
+        border: 1px solid black;
+        padding: 10px;
+        margin: 10px 0; /* Only vertical margin */
+        height: 400px; /* Adjust height as necessary */
+        overflow-y: auto; /* Enables scrolling */
+      }
+      .song {
+        margin: 5px;
+        padding: 5px;
+        border: 1px solid grey;
+        cursor: pointer;
+      }
+      .song:hover {
+        background-color: lightgrey;
+      }
+
+      /* Responsive adjustments */
+      @media (min-width: 480px) {
+        /* Smaller devices (phones, 600px and down) */
+        #masterList,
+        #setList {
+          width: 48%; /* Two columns on smaller screens */
+          margin: 10px 1%; /* Small side margins for gutter space */
+        }
+        #listsContainer {
+          justify-content: space-around;
+        }
+      }
+
+      @media (min-width: 768px) {
+        /* Medium devices (tablets, 768px and up) */
+        #masterList,
+        #setList {
+          width: 45%; /* Slightly larger than on smaller devices */
+        }
+      }
+
+      @media (min-width: 1024px) {
+        /* Large devices (desktops, 1024px and up) */
+        #listsContainer {
+          justify-content: space-around;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>adventures of todd & niki Setlist Maker</h1>
+    <textarea id="songInput" rows="10" cols="50">
+Alright now 123 bpm capo 0 
+All i wanna do 120 bpm capo 0
+American Boy 118 bpm capo 0
+American Girl 230 bpm capo 0
+as it was 174 bpm capo 0
+i’m a believer 162 bpm capo 0
+Bennie & the jets 72 bpm capo 0
+Boots were made for walking 164 bpm capo 0
+Brass in Pocket 98 bpm capo 0
+BreakDown 114 bpm capo 0
+Brkfst at Tifnys 112 bpm capo 0
+Brown eyed girl 149 bpm capo 0 
+Brown eyed girl - original bpm 78 bpm capo 0 
+Brown eyed / i’m a believer 149 bpm capo 0 
+Brown eyed / i’m a believer 155 bpm capo 0 
+Cake by the ocean 120 bpm capo 0 
+Carolina 90 bpm capo 2
+Crazy (patsy c) 76 bpm capo 0 
+Crazy (gnarls) /sweet dreams 116 bpm capo 3
+Crazy little thing called love 154 bpm capo 0 
+Don’t know why  88 bpm capo 3 
+Don’t start now slower 120 bpm capo 0 
+Don’t start now 124 bpm capo 0 
+Don’t u 4get  112 bpm capo 0 
+Dreams 120 bpm capo 0 
+Everywhere 108 bpm capo 0 
+Fade n2 u capo 0  89 bpm
+Fire capo 0  171 bpm
+Flowers/American Boy 118 bpm capo 0 
+Fly me to the moon 126 bpm capo 0 
+Footloose 174 bpm capo 0 
+Funk 103 bpm
+Get back 123 bpm capo 0 
+Gimme one reason 100 bpm capo 2
+Go your way 135 bpm capo 3
+HardtoHandle/Butterfly(crazyTown) 104 bpm capo 2
+Hotel California 74 bpm capo 2
+houdini / Training season 120 bpm
+i’m a believer - original bpm 158 bpm capo 0
+Jackson 130 bpm capo 0
+j.t. Sad jams 77 bpm
+Just like heaven 151 bpm capo 0
+Killing me softly 92 bpm capo 0
+Landslide 73 bpm capo 3
+Levitating 103 bpm capo 0
+Let’s stay together 102 bpm capo 0
+Little Lies 125 bpm capo 2
+Long Train 117 bpm capo 2
+Love Song 140 bpm capo 0
+Lovely Day 98 bpm capo 0
+Mary Janes last dance 86 bpm capo 0
+Melt with you 156 bpm capo 0
+Melt with you (atn) slower 145 bpm capo 0
+Moon dance 134 bpm capo 0
+Price Tag 88 bpm
+Proud mary / Fire 171 bpm capo 0
+Put your records on 96 bpm capo 0
+Red red wine 89 bpm capo 0
+Rhiannon /Bossa 129 bpm capo 0
+rock 120 bpm 
+Rock this town 200 bpm capo 0
+Saw her standing there 160 bpm capo 0
+Save Tonight 120 bpm capo 0
+Shut up and Dance 128 bpm capo 1
+Shuffle 114 bpm
+Selfish 88 bpm 
+Sunday morning 88 bpm capo 0
+sweet dreams/Crazy (gnarls) 125 bpm capo 3
+sweet dreams/Crazy (gnarls) 127 bpm capo 3
+Son of a preacher man 91 bpm capo 0
+Stand by me 116 bpm capo 0
+Stir it up 74 bpm capo 0
+style capo 2 95 bpm
+Summer of 69 139 bpm capo 0
+Take it easy 139 bpm capo 0
+Tennessee Whiskey/Fade n2 u 89 bpm
+Tiny dancer 73 bpm capo 0
+Toxic acoustic 138 bpm
+Training season /houdini 120 bpm
+Upside down 102 bpm capo 0 
+Valerie 106 bpm capo 3
+Valerie (slower) 103 bpm capo 3
+Watermelon sugar capo 0 95 bpm
+way you make me feel 114 bpm capo 0
+You are the best thing 89 bpm capo 3
+You may be right 151 bpm capo 0
+Your Love 129 bpm
+</textarea
+    ><br />
+    <button onclick="parseSongs()">Load Songs</button>
+    <div id="listsContainer">
+      <div id="masterList" tabindex="0"></div>
+      <div id="setList"></div>
+    </div>
+    <button onclick="copySetlist()">Copy Setlist</button>
+
+    <script>
+      let originalSongs = [];
+      let masterSongs = [];
+      let setList = [];
+
+      function parseSongs() {
+        const input = document.getElementById("songInput").value.split("\n");
+        originalSongs = input.map((line, index) => {
+          const name = line.replace(/(\d+ bpm|capo \d+)/g, "").trim();
+          const bpmMatch = line.match(/(\d+) bpm/);
+          const bpm = bpmMatch ? parseInt(bpmMatch[1]) : null;
+          const capoMatch = line.match(/capo (\d+)/);
+          const capo = capoMatch ? parseInt(capoMatch[1]) : null;
+          return { id: index, name, bpm, capo, originalIndex: index };
+        });
+        masterSongs = [...originalSongs];
+        displaySongs("masterList", masterSongs);
+        document.getElementById("songInput").style.display = "none"; // Optionally hide the input textarea
+      }
+
+      function displaySongs(containerId, songs) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = "";
+        songs.forEach((song) => {
+          const songDiv = document.createElement("div");
+          songDiv.className = "song";
+          songDiv.textContent = `${song.name} ${
+            song.bpm ? "- " + song.bpm + " bpm" : ""
+          } ${song.capo !== null ? "- capo " + song.capo : ""}`;
+          songDiv.onclick = () => {
+            containerId === "masterList"
+              ? selectSong(song)
+              : deselectSong(song);
+          };
+          if (containerId === "setList") {
+            songDiv.ondblclick = () => moveSongUp(song);
+          }
+          container.appendChild(songDiv);
+        });
+      }
+
+      function selectSong(song) {
+        setList.push(song);
+        masterSongs = masterSongs.filter((s) => s.id !== song.id);
+        updateSuggestions();
+        displaySongs("setList", setList);
+        displaySongs("masterList", masterSongs);
+      }
+
+      function deselectSong(song) {
+        masterSongs.splice(song.originalIndex, 0, song); // Insert song back into its original position
+        setList = setList.filter((s) => s.id !== song.id);
+        updateSuggestions();
+        displaySongs("setList", setList);
+        displaySongs("masterList", masterSongs);
+      }
+
+      function moveSongUp(song) {
+        const index = setList.indexOf(song);
+        if (index > 0) {
+          [setList[index - 1], setList[index]] = [
+            setList[index],
+            setList[index - 1],
+          ];
+          displaySongs("setList", setList);
+        }
+      }
+
+      function updateSuggestions() {
+        if (!setList.length) return;
+        const lastSelectedSong = setList[setList.length - 1];
+
+        masterSongs.sort((a, b) => {
+          const capoMatchA = a.capo === lastSelectedSong.capo ? 0 : 100;
+          const capoMatchB = b.capo === lastSelectedSong.capo ? 0 : 100;
+          const bpmDiffA = Math.abs(a.bpm - lastSelectedSong.bpm);
+          const bpmDiffB = Math.abs(b.bpm - lastSelectedSong.bpm);
+          const exactMatchA = capoMatchA === 0 && bpmDiffA <= 3 ? 0 : 1;
+          const exactMatchB = capoMatchB === 0 && bpmDiffB <= 3 ? 0 : 1;
+
+          return (
+            exactMatchA - exactMatchB ||
+            capoMatchA - capoMatchB ||
+            bpmDiffA - bpmDiffB
+          );
+        });
+
+        displaySongs("masterList", masterSongs);
+      }
+
+      function copySetlist() {
+        const setListSongs = setList
+          .map(
+            (song) =>
+              `${song.name} - ${song.bpm ? song.bpm + " bpm" : ""} ${
+                song.capo !== null ? "- capo " + song.capo : ""
+              }`
+          )
+          .join("\n");
+        navigator.clipboard.writeText(setListSongs).then(
+          () => alert("McCool-i-fied Setlist copied to clipboard!"),
+          (err) => console.error("Failed to copy setlist: ", err)
+        );
+      }
+    </script>
+  </body>
+</html>
